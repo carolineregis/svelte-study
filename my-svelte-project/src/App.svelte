@@ -1,10 +1,20 @@
 <script lang="ts">
   import BarraSuperior from "./components/BarraSuperior.svelte";
   import Titulo from "./components/Titulo.svelte";
+  import type IUsuario from './interfaces/IUsuario'
 
   let valorInput = 'carol';
   function aoSubmeter() {
     console.log(valorInput)
+  }
+
+  let usuario: IUsuario = {
+    login: 'carolineregis',
+    nome: 'Caroline Regis',
+    avatar_url: 'https://github.com/carolineregis.png',
+    perfil_url: 'https://github.com/carolineregis',
+    repositorios_publicos: 10,
+    seguidores: 20
   }
 
 
@@ -27,35 +37,40 @@
     </div>
   </header>
 
+  {#if usuario}
   <div class="card-usuario">
     <BarraSuperior/>
 
     <div class="container-usuario">
       <div class="foto-container">
-        <a href="http//github.com/carolineregis" target="_blank" rel="noopener">
-          <div class="foto-usuario"></div>
+        <a href={usuario.perfil_url} target="_blank" rel="noopener">
+          <div 
+          class="foto-usuario" 
+          style:background-image="url({usuario.avatar_url})"
+          ></div>
         </a>
       </div>
 
-      <div class="detalhes-usuario">
+      <div class="detalhes-usuario" >
         <div class="info">
-          Nome: <span> Caroline Regis </span>
+          Nome: <span> {usuario.nome} </span>
         </div>
 
         <div class="info">
-          Usuario: <span> carolineregis </span>
+          Usuario: <span> {usuario.login} </span>
         </div>
 
         <div class="info">
-          Seguidores: <span> 30 </span>
+          Seguidores: <span> {usuario.seguidores} </span>
         </div>
 
         <div class="info">
-          Repositorios: <span> 10 </span>
+          Repositorios: <span> {usuario.repositorios_publicos} </span>
         </div>
       </div>
     </div>
   </div>
+  {/if}
 
 
 </div>
@@ -149,7 +164,6 @@
     border: 4.56px solid #2e80fa;
     border-radius: 50%;
     background-size: cover;
-    background-image: url('https://github.com/carolineregis.png');
   }
 
   .detalhes-usuario {
